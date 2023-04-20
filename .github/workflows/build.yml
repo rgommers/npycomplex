@@ -18,19 +18,23 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install Ninja
-        run: python -m pip --disable-pip-version-check install ninja
-
       - name: Setup MSVC
         uses: bus1/cabuild/action/msdevshell@e22aba57d6e74891d059d66501b6b5aed8123c4d  # v1
         with:
           architecture: x64
 
-      - name: Install Meson
-        run: python -m pip --disable-pip-version-check install meson
+      - name: Install dependencies
+        run: python -m pip --disable-pip-version-check install meson ninja Cython numpy
 
       - name: Build
         run: |
           meson setup build
           cd build
           meson compile
+
+      - name: Test C version
+        run: ./build/c/npycomplex
+
+      - name: Test Python version
+        run: |
+          PYTHONPATH="./build/cython" python -c "import npycomplex; npycomplex.main()"
