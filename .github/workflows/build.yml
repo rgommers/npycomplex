@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build on Windows
+  build-windows:
+    name: Build & Test (windows)
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -35,6 +35,40 @@ jobs:
       - name: Test C version
         run: .\build\c\npycomplex
 
+
       - name: Test Cython version
         run: |
           PYTHONPATH=".\build\cython" python -c "import npycomplex; npycomplex.main()"
+
+  build-unix:
+    strategy:
+      matrix:
+        os: [ubuntu, macos]
+    name: Build & Test
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up target Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: python -m pip --disable-pip-version-check install meson ninja Cython numpy
+
+      - name: Build
+        run: |
+          meson setup build
+          cd build
+          meson compile
+
+      - name: Test C version
+        run: ./build/c/npycomplex
+        
+
+      - name: Test Cython version
+        run: |
+          PYTHONPATH="./build/cython" python -c "import npycomplex; npycomplex.main()"
+
