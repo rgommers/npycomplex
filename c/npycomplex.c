@@ -6,7 +6,7 @@
 
 #if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
 typedef _Fcomplex fcomp;
-typedef fcomp_build(r, i) {r, i}
+#define fcomp_build(r, i) {r, i}
 #else
 typedef float complex fcomp;
 #define fcomp_build(r, i) ((r) + (i) * I)
