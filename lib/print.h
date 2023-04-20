@@ -1,6 +1,6 @@
 #ifndef _PRINT_H_
 
-#include <numpy/arrayobject.h>
+#include <numpy/npy_common.h>
 
 void npy_complex_print(npy_complex64 *);
 
