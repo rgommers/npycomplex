@@ -6,10 +6,10 @@
 
 #if defined(_MSC_VER) && !defined(__INTEL_COMPILER)
 typedef _Fcomplex fcomp;
-#define fcomp_build(r, i) {r, i}
+#define BUILD_FCOMP(r, i) _FCbuild((r), (i))
 #else
 typedef float complex fcomp;
-#define fcomp_build(r, i) ((r) + (i) * I)
+#define BUILD_FCOMP(r, i) ((r) + (i) * I)
 #endif
 
 typedef union {
@@ -21,7 +21,7 @@ typedef union {
 int main(void)
 {
     numpy_comp example;
-    example.native_value = fcomp_build(2, 3);
+    example.native_value = BUILD_FCOMP(2.0f, 3.0f);
     npy_complex_print(&example.numpy_value);
     return 0;
 }
