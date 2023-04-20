@@ -2,6 +2,7 @@ name: npycomplex-dev
 channels:
   - conda-forge
 dependencies:
-  - meson>=0.64.0
+  - meson
   - ninja
   - Cython
+  - numpy
