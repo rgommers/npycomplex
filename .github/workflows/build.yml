@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip --disable-pip-version-check install ninja Cython numpy
-          python -m pip --disable-pip-version-check install git+https://github.com/rgommers/meson.git@master
+          python -m pip --disable-pip-version-check install git+https://github.com/rgommers/meson.git@cy-win-debug
 
       - name: Build
         run: |
