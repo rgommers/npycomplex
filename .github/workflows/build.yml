@@ -25,7 +25,9 @@ jobs:
           architecture: x64
 
       - name: Install dependencies
-        run: python -m pip --disable-pip-version-check install meson ninja Cython numpy
+        run: |
+          python -m pip --disable-pip-version-check install ninja Cython numpy
+          python -m pip --disable-pip-version-check install git+https://github.com/rgommers/meson.git@master
 
       - name: Build
         run: |
