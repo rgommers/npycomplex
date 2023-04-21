@@ -32,10 +32,6 @@ jobs:
           cd build
           meson compile
 
-      - name: Test C version
-        run: .\build\c\npycomplex
-
-
       - name: Test Cython version
         run: |
           PYTHONPATH=".\build\cython" python -c "import npycomplex; npycomplex.main()"

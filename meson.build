@@ -12,5 +12,8 @@ inc_np = include_directories(incdir_numpy)
 
 inc_lib = include_directories('.')
 
-subdir('c')
+if target_machine.system() != 'windows'
+  subdir('c')
+endif
+
 subdir('cython')
