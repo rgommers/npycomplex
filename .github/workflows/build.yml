@@ -28,13 +28,13 @@ jobs:
 
       - name: Build
         run: |
-          meson setup build
-          cd build
-          meson compile
+          meson setup build -Dbuildtype=release
+          meson compile -C build
 
       - name: Test Cython version
         run: |
-          PYTHONPATH=".\build\cython" python -c "import npycomplex; npycomplex.main()"
+          cd build/cython
+          python -c "import npycomplex; npycomplex.main()"
 
   build-unix:
     strategy:
