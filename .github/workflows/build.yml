@@ -31,6 +31,9 @@ jobs:
           meson setup build -Dbuildtype=release
           meson compile -C build
 
+      - name: Test C version
+        run: .\build\c\npycomplex
+
       - name: Test Cython version
         run: |
           cd build/cython
@@ -62,7 +65,6 @@ jobs:
 
       - name: Test C version
         run: ./build/c/npycomplex
-        
 
       - name: Test Cython version
         run: |
