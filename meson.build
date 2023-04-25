@@ -1,7 +1,6 @@
 project('npycomplex', 'c', 'cython')
 
-py_mod = import('python')
-py3 = py_mod.find_installation()
+py3 = import('python').find_installation(pure: false)
 py3_dep = py3.dependency()
 
 incdir_numpy = run_command(py3,
@@ -12,8 +11,5 @@ inc_np = include_directories(incdir_numpy)
 
 inc_lib = include_directories('.')
 
-if target_machine.system() != 'windows'
-  subdir('c')
-endif
-
+subdir('c')
 subdir('cython')
